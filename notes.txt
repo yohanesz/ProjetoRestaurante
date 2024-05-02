@@ -1,0 +1,7 @@
+=> alterar Id do pedidos
+
+=> implementar todas as funções do menu de pedidos
+
+=> id mesa alterar
+
+=> testar o listar Pedido
