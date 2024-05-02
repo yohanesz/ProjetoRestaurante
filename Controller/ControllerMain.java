@@ -28,40 +28,6 @@ public class ControllerMain {
     Fila<Cliente> filaParaAlmocar = database.getFilaParaAlmocar();
     Fila<Cliente> filaDoCaixa = database.getFilaDoCaixa();
 
-    public static void main(String[] args) {
-
-        ControllerMain controllerMain = new ControllerMain();
-        controllerMain.inicioClienteOuAdmin();
-    }
-
-    public void iniciarPrograma() {
-
-        inicioClienteOuAdmin();
-
-        // => inicia o iniciarAtendimento
-        // => tem cpf, ou cadastra novo cliente
-        // => lista funcionarios e escolhe um garçom
-        // => verifica as mesas e escolhe uma
-        // => faz o pedido
-        // => status do pedido recebido
-        // => fila: pessoas para almoçar (novoCliente)
-        // => pedido vai ir pro funcionario Cozinheiro
-        // => pedido fica pronto e garçom leva na mesa
-        // => numero de pessoas almoçando +1
-        // => fila: sai da fila
-        // => listarClientesAlmoçando()
-        // => encerrar encerrarAtendimento(getID)
-        // => n de pessoas almoçando -1
-        // => mesas livres +1
-        // => desalocar mesa
-        // => fila do caixa = cliente
-        // => cliente vai dar um valor X
-        // => calculo do troco valorDadopeloClienteX - valorTotal
-        // => registra esse pagamento
-        // => emissão de recibo
-
-    }
-
     public void iniciarAtributosPadrao() {
         controllerCliente.criarClientePadrao();
         Cliente clienteTeste = clientes.getDadoById(1).getDado();

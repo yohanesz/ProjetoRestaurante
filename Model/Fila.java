@@ -21,13 +21,10 @@ public class Fila<T> {
             System.out.println("Fila está vazia");
             return null;
         }
-
     }
 
     public void inserir(T dado) {
-
         Nodo<T> novoItem = new Nodo<T>(dado);
-
         if (estaVazio()) {
             inicio = novoItem;
             fim = novoItem;
@@ -36,7 +33,6 @@ public class Fila<T> {
             fim = novoItem;
         }
         tamanho++;
-
     }
 
     public T remover() {
@@ -44,17 +40,13 @@ public class Fila<T> {
             System.out.println("Fila está vazia");
             return null;
         }
-
         T valor = inicio.getDado();
         inicio = inicio.getProx();
         tamanho--;
-
         if (estaVazio()) {
             fim = null;
         }
-
         return valor;
-
     }
 
 }

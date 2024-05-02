@@ -5,8 +5,6 @@ import java.lang.reflect.Field;
 public class ListaEncadeada<T> {
 
     private Nodo<T> start;
-    // private Nodo<T> fim; => AVALIAR O USO DE HASNEXT
-    // private boolean hasNext;
 
     public boolean isEmpty() {
         return start == null;
