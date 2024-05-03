@@ -19,7 +19,7 @@ public class viewPedido {
         viewLine.alignLeft("[1] - Novo pedido");
         viewLine.alignLeft("[2] - Verificar pedidos");
         viewLine.alignLeft("[3] - Cancelar pedido");
-        viewLine.alignLeft("[3] - Voltar");
+        viewLine.alignLeft("[4] - Voltar");
         viewLine.Line();
         viewLine.input();
 

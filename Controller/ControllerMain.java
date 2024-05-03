@@ -40,13 +40,13 @@ public class ControllerMain {
     public void inicioClienteOuAdmin() {
 
         iniciarAtributosPadrao();
-        viewMain.inicioClienteOuAdmin();
-        viewLine.input();
-        int option = read.nextInt();
-        read.nextLine();
         boolean verificador = true;
 
         do {
+            viewMain.inicioClienteOuAdmin();
+            viewLine.input();
+            int option = read.nextInt();
+            read.nextLine();
 
             if (option == 1) {
                 iniciarAtendimentoCliente();
@@ -55,6 +55,7 @@ public class ControllerMain {
             } else {
                 viewMain.erro();
                 read.nextLine();
+                verificador = false;
             }
 
         } while (verificador);
@@ -106,53 +107,89 @@ public class ControllerMain {
         } while (verificador);
     }
 
-    public void iniciarAtendimentoCliente() {
-
+    public Nodo<Cliente> logarCliente() {
         Nodo<Cliente> clienteLogado = controllerCliente.iniciarAtendimento();
+        return clienteLogado;
+    }
+
+    public Nodo<Funcionarios> escolherGarcom() {
         Nodo<Funcionarios> garcomEscolhido = controllerFuncionario
                 .getFuncionario(controllerFuncionario.escolherGarçom());
+        return garcomEscolhido;
+    }
 
-        filaParaAlmocar.inserir(clienteLogado.getDado());
+    public void iniciarAtendimentoCliente() {
 
-        boolean verificador = true;
+        boolean verificadorInicio = true;
 
-        Pedido pedidoFeito = controllerPedido.menuPedido(garcomEscolhido.getDado(), clienteLogado.getDado());
         do {
-
-            viewMain.menuCliente(pedidoFeito);
-            int option = read.nextInt();
+            viewLine.title("INICIO");
+            viewLine.alignLeft("[1] - Iniciar atendimento");
+            viewLine.alignLeft("[2] - Voltar");
+            viewLine.Line();
+            viewLine.input();
+            int optionInicio = read.nextInt();
             read.nextLine();
 
-            switch (option) {
-                case 1: // pedido
-                    controllerPedido.iniciarAdminPedido();
-                    break;
+            if (optionInicio == 1) {
 
-                case 2: // mesa
-                    controllerMesa.iniciarMesaCliente(clienteLogado.getDado());
-                    break;
+                boolean verificador = true;
+                do {
 
-                case 3: // proxima etapa
-                    proximaEtapa(pedidoFeito, clienteLogado.getDado(), garcomEscolhido.getDado());
-                    break;
+                    Nodo<Funcionarios> garcomEscolhido = escolherGarcom();
+                    Nodo<Cliente> clienteLogado = logarCliente();
 
-                case 4:
-                    controllerEstatistica.iniciarAdminEstatistica();
-                    break;
+                    filaParaAlmocar.inserir(clienteLogado.getDado());
 
-                case 7:
-                    controllerCaixa.iniciarAdminCaixa();
-                    break;
+                    Pedido pedidoFeito = controllerPedido.menuPedido(garcomEscolhido.getDado(),
+                            clienteLogado.getDado());
 
-                case 6: // voltar
-                    verificador = false;
-                    break;
+                    if (pedidoFeito == null) {
+                        break;
+                    }
 
-                default:
-                    break;
+                    viewMain.menuCliente(pedidoFeito);
+                    int option = read.nextInt();
+                    read.nextLine();
+
+                    switch (option) {
+                        case 1: // pedido
+                            controllerPedido.iniciarAdminPedido();
+                            break;
+
+                        case 2: // mesa
+                            controllerMesa.iniciarMesaCliente(clienteLogado.getDado());
+                            break;
+
+                        case 3: // proxima etapa
+                            proximaEtapa(pedidoFeito, clienteLogado.getDado(), garcomEscolhido.getDado());
+                            break;
+
+                        case 4:
+                            controllerEstatistica.iniciarAdminEstatistica();
+                            break;
+
+                        case 5:
+                            controllerCaixa.iniciarAdminCaixa();
+                            break;
+
+                        case 6: // voltar
+                            verificador = false;
+                            break;
+
+                        default:
+                            break;
+                    }
+
+                } while (verificador);
+
+            } else if (optionInicio == 2) {
+                verificadorInicio = false;
+                break;
             }
 
-        } while (verificador);
+        } while (verificadorInicio);
+
     }
 
     public void proximaEtapa(Pedido pedido, Cliente clienteLogado, Funcionarios funcionario) {

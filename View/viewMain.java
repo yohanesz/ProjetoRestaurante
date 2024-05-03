@@ -63,6 +63,7 @@ public class viewMain {
     }
 
     public static void menuCliente(Pedido pedidoAtual) {
+
         viewLine.title("MENU CLIENTE");
         viewLine.alignLeft("STATUS DO PEDIDO " + pedidoAtual.getId() + ": " + pedidoAtual.getStatus());
         viewLine.alignLeft("[1] - Pedido");
@@ -73,6 +74,7 @@ public class viewMain {
         viewLine.alignLeft("[6] - Voltar");
         viewLine.Line();
         viewLine.input();
+
     }
 
 }
